@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+// Breakpoints
+$small-only: screen and (max-width: 39.9375em);
+$touch: screen and (max-width: 64em);
+$medium: screen and (min-width: 40em);
+$medium-only: screen and (min-width: 40em) and (max-width: 63.9375em);
+$large: screen and (min-width: 64em);
+
+@import 'breakpoint';
+
+.suburst-container {
+  text-align: center;
+  @include breakpoint($medium-only) {
+    display: flex;
+  }
+
+  #sunburst {
+    g .ancestor {
+      fill-opacity: 0.15;
+    }
+  }
+}
+
+.text-column {
+  @include breakpoint($large) {
+    padding-right: 4rem;
+  }
+}
+
+.small-text {
+  display: none;
+  margin-bottom: 2rem;
+  @include breakpoint($small-only) {
+    display: block;
+  }
+}
+
+.large-text {
+  @include breakpoint($small-only) {
+    display: none;
+  }
+}
+
+h2,
+h3 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-transform: none;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: none;
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+h3 {
+  margin-top: 1rem;
+}
+
+.sunburst-text {
+  margin-top: 5rem;
+
+  @include breakpoint($small-only) {
+    margin-top: 2rem;
+  }
+
+  .parent-data {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.layer-4 {
+  display: none;
+}
