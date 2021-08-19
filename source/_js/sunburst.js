@@ -165,6 +165,32 @@ const Sunburst = {
           document.querySelector('.text').style.display = 'none';
           formatHTML(d);
           highlightSequence(d.current);
+
+          const text = g
+            .append('text')
+              .attr('class', 'sunburst-center-text')
+              .text('Clear')
+              .style('fill', '#bbbbbb')
+              .style('fill-opacity', .7)
+              .style('font-family', 'Lato')
+              .style('font-size', '3rem')
+              .attr('x', -50)
+              .attr('y', 10)
+            .on('mouseover', () => {
+              if (document.querySelector('.text').style.display === 'none') {
+                document.querySelector('.text').style.display = 'block';
+              } else {
+                document.querySelector('.text').style.display = 'none';
+              }
+              d3.selectAll('path').classed('ancestor', false);
+              g.select('text').remove();
+              g.select('rect').remove();
+            })
+            .on('mouseout', () => {
+              document.querySelector('.text').style.display = 'block';
+              tooltips.text('')
+              d3.selectAll('path').classed('ancestor', false);
+            });
         })
         .on('mouseout', d => {
           removeHighlight(d.current);
