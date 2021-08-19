@@ -34,20 +34,16 @@ const Sunburst = {
         let awardAmount = Math.round(data.totalAwardAmount * 100) / 100;
         awardAmount = awardAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-        data.children.forEach(child => {
-          totalNumOfAwards += child.count;
-        });
-
         tooltips.html(
           `<div class="column large-12 small-12">
             <h2 class="title">${data.name}</h2>
           </div>
-          <div class="column large-5 small-6">
+          <div class="column large-5 small-12">
             <h3>Strategy/Focus</h3>
             <h4>${data.focus}</h4>
             <p>${data.description}</p>
           </div>
-          <div class="column large-7 small-6">
+          <div class="column large-7 small-12">
             <h3>Types of Programs</h3>
             <p>${data.children.length}</p>
             <h3>Total Award Amount</h3>
@@ -68,11 +64,11 @@ const Sunburst = {
             <span class="parent-data">${d.parent.data.name}</span>
             <h2 class="title">${data.name}</h2>
           </div>
-          <div class="column large-5 small-6">
+          <div class="column large-5 small-12">
             <h3>Program Focus</h3>
             <p>${data.purpose}</p>
           </div>
-          <div class="column large-7 small-6">
+          <div class="column large-7 small-12">
             <h3>Geographic Focus</h3>
             <p>${data.allCountriesPerType.sort().join(', ')}</p>
             <h3>Number of Awards</h3>
@@ -93,11 +89,11 @@ const Sunburst = {
             <span class="parent-data">${d.parent.parent.data.name} | ${d.parent.data.name}</span>
             <h2 class="title">${data.name}</h2>
           </div>
-          <div class="column large-5 small-6">
+          <div class="column large-5 small-12">
             <h3>Summary</h3>
             <p>${data.description}</p>
           </div>
-          <div class="column large-7 small-6">
+          <div class="column large-7 small-12">
             <h3>Number of Awards</h3>
             <p>${data.count}</p>
             <h3>Types of Outputs</h3>
@@ -156,7 +152,7 @@ const Sunburst = {
 
       const g = svg.append('g').attr('transform', `translate(${width / 2},${width / 2})`);
 
-      g
+      const path = g
         .selectAll('path')
         .data(root.descendants().slice(1))
         .join('path')
