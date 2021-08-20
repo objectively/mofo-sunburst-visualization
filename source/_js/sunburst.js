@@ -1,6 +1,5 @@
 const Sunburst = {
   init() {
-    console.log("sunbyrst")
     const width = 500;
     const height = 500;
     const radius = Math.min(width, height) / 10.3;
@@ -152,7 +151,7 @@ const Sunburst = {
 
       const g = svg.append('g').attr('transform', `translate(${width / 2},${width / 2})`);
 
-      const path = g
+      g
         .selectAll('path')
         .data(root.descendants().slice(1))
         .join('path')
@@ -165,37 +164,23 @@ const Sunburst = {
           document.querySelector('.text').style.display = 'none';
           formatHTML(d);
           highlightSequence(d.current);
-
-          const text = g
+          g
             .append('text')
               .attr('class', 'sunburst-center-text')
               .text('Clear')
               .style('fill', '#bbbbbb')
-              .style('fill-opacity', .7)
-              .style('font-family', 'Lato')
-              .style('font-size', '3rem')
-              .attr('x', -50)
+              .style('font-size', '2rem')
+              .attr('x', -40)
               .attr('y', 10)
             .on('mouseover', () => {
-              if (document.querySelector('.text').style.display === 'none') {
-                document.querySelector('.text').style.display = 'block';
-              } else {
-                document.querySelector('.text').style.display = 'none';
-              }
-              d3.selectAll('path').classed('ancestor', false);
               g.select('text').remove();
-              g.select('rect').remove();
-            })
-            .on('mouseout', () => {
-              document.querySelector('.text').style.display = 'block';
-              tooltips.text('')
-              d3.selectAll('path').classed('ancestor', false);
             });
         })
         .on('mouseout', d => {
           removeHighlight(d.current);
           tooltips.html('');
           document.querySelector('.text').style.display = 'block';
+          g.select('text').remove();
         });
     });
   }
