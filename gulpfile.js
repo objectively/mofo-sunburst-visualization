@@ -11,7 +11,7 @@ const gulp = require('gulp');
 const mocha = require('gulp-spawn-mocha');
 const plumber = require('gulp-plumber');
 const rename = require('gulp-rename');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const shell = require('gulp-shell');
 const webpack = require('webpack-stream');
 const webpackDevConfig = require('./webpack-dev.config.js');
@@ -36,7 +36,7 @@ gulp.task('build:styles', () =>
   gulp
     .src('source/_sass/styles.scss')
     .pipe(plumber())
-    .pipe(sass())
+    .pipe(sass({includePaths: ['source/_sass/styles.scss']}))
     .pipe(
       autoprefixer({
         Browserslist: ['last 2 versions', '> 5%', 'IE 9']
@@ -123,7 +123,7 @@ gulp.task('test', gulp.series('test:html', 'test:es-lint', 'test:mocha'), done =
   deploy
 ========================================= */
 
-gulp.task('push-gh-master', shell.task(['git push origin master']));
+gulp.task('push-gh-master', shell.task(['git push origin main']));
 
 gulp.task('push-gh-pages', () => gulp.src('_site/**/*').pipe(ghPages({ force: true })));
 
