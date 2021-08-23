@@ -59,7 +59,7 @@ $large: screen and
 
 .large-text {
   @include breakpoint($small-only) {
-    display: none;
+    display: none!important;
   }
 }
 

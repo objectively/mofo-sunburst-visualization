@@ -161,7 +161,7 @@ const Sunburst = {
         .style('stroke', '#FFF')
         .style('stroke-width', 1)
         .on('mouseover', d => {
-          document.querySelector('.text').style.display = 'none';
+          document.querySelector('.large-text').style.display = 'none';
           formatHTML(d);
           highlightSequence(d.current);
           g
@@ -179,7 +179,7 @@ const Sunburst = {
         .on('mouseout', d => {
           removeHighlight(d.current);
           tooltips.html('');
-          document.querySelector('.text').style.display = 'block';
+          document.querySelector('.large-text').style.display = 'block';
           g.select('text').remove();
         });
     });
