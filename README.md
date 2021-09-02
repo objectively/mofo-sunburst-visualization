@@ -1,4 +1,4 @@
-# objectively-jekyll-boilerplate
+# mofo-sunburst-visualization
 
 ### Prerequisites
 - [jekyll](https://jekyllrb.com/) 
