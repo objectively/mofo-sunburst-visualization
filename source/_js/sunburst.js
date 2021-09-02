@@ -6,7 +6,6 @@ const Sunburst = {
 
     const partition = data => {
       const root = d3.hierarchy(data)
-        // .sum(d => d.children ? 0 : 1)
         .sum(d => (d.children || d.count))
       return d3.partition().size([2 * Math.PI, root.height + 1])(root);
     };
@@ -106,6 +105,7 @@ const Sunburst = {
     const getAncestors = node => {
       const path = [];
       let current = node;
+
       while (current.parent) {
         path.unshift(current);
         current = current.parent;
@@ -139,7 +139,7 @@ const Sunburst = {
       'Open Science Fellows': 'hotpink'
     };
 
-    d3.json('../sunburst-data.json').then(data => {
+    d3.json('../data/sunburst-data.json').then(data => {
       const root = partition(data);
       root.each(d => d.current = d);
 
@@ -166,12 +166,12 @@ const Sunburst = {
           highlightSequence(d.current);
           g
             .append('text')
-              .attr('class', 'sunburst-center-text')
-              .text('Clear')
-              .style('fill', '#bbbbbb')
-              .style('font-size', '2rem')
-              .attr('x', -40)
-              .attr('y', 10)
+            .attr('class', 'sunburst-center-text')
+            .text('Clear')
+            .style('fill', '#bbbbbb')
+            .style('font-size', '2rem')
+            .attr('x', -40)
+            .attr('y', 10)
             .on('mouseover', () => {
               g.select('text').remove();
             });
