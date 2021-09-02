@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 import { arc } from 'd3-shape';
 import { hierarchy, partition } from 'd3-hierarchy';
 import { select, selectAll } from 'd3-selection';
