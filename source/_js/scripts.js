@@ -143,14 +143,38 @@ const removeHighlight = d => {
 
 // Specify colors
 const colors = {
-  '2016': '#7b615c',
-  '2017': '#de783b',
-  '2018': '#6ab975',
-  '2019': '#a173d1',
-  '2020': '#bbbbbb',
-  '2021': '#5687d1',
-  'Open Web Fellows': 'rebeccapurple',
-  'Open Science Fellows': 'hotpink'
+  '2016': '#ff0218',
+  '2017': '#ff283a',
+  '2018': '#ff4e5e',
+  '2019': '#ff7480',
+  '2020': '#ff9aa3',
+  'Advocacy Network Fund': '#277da1',
+  'Creative Media Awards': '#f9844a',
+  'Data Futures Lab': '#577590',
+  'Discretionary Awards': '#f8961e',
+  'Fellows in Residence/Senior Fellows': '#4d908e',
+  'Gigabit Community Fund': '#f3722c',
+  'Hive': '#43aa8b',
+  'MOSS (Mozilla Open Source Support)': '#f94144',
+  'Mozilla Fellowship': '#90be6d',
+  'Mozilla Science Mini Grants': '#c43437',
+  'NSF WINS (Wireless Innovations for a Networked Society Challenge)': '#f9c74f',
+  'Open Internet Engineering Fellowship': '#af376b',
+  'Open News Fellowship': '#2d5480',
+  'Open Science Fellowship': '#662d91',
+  'Open Web Fellowship': '#234061',
+  'OpenDOTT Fellowship': '#485399',
+  'Other Programs': '#1e3753',
+  'Responsible Computer Science Challenge': '#39669c',
+  'Tech + Society Fellowship': '#15273c',
+  'Tech Policy Fellowship': '#471f61',
+  'Privacy + Security': '#1a1a49',
+  'Open Innovation': '#31315c',
+  'Digital Inclusion': '#48486d',
+  'Web Literacy': '#5f5f80',
+  'Decentralization': '#767692',
+  'Trustworthy AI': '#8c8ca3',
+  'Other/unavailable': '#a3a3b6'
 };
 
 d3.json('../data/sunburst-data.json').then((data) => {
