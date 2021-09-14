@@ -177,7 +177,7 @@ const colors = {
   'Other/unavailable': '#a3a3b6'
 };
 
-d3.json('../data/sunburst-data.json').then((data) => {
+d3.json(`${window.location.origin + window.location.pathname}/data/sunburst-data.json`).then((data) => {
   const root = setPartition(data);
   root.each(d => d.current = d);
 
@@ -221,6 +221,6 @@ d3.json('../data/sunburst-data.json').then((data) => {
       g.select('text').remove();
     });
 })
-.catch((error) => {
-  console.error('Error loading the data');
-});
+  .catch((error) => {
+    console.error('Error loading the data');
+  });
