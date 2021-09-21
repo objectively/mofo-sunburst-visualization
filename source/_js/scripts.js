@@ -143,11 +143,11 @@ const removeHighlight = d => {
 
 // Specify colors
 const colors = {
-  '2016': '#ff0218',
-  '2017': '#ff283a',
-  '2018': '#ff4e5e',
-  '2019': '#ff7480',
-  '2020': '#ff9aa3',
+  '2016': '#CCCCCC',
+  '2017': '#CCCCCC',
+  '2018': '#CCCCCC',
+  '2019': '#CCCCCC',
+  '2020': '#CCCCCC',
   'Advocacy Network Fund': '#277da1',
   'Creative Media Awards': '#f9844a',
   'Data Futures Lab': '#577590',
