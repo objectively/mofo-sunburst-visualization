@@ -202,6 +202,9 @@ d3.json(`${window.location.origin + window.location.pathname}/data/sunburst-data
       document.querySelector('.large-text').style.display = 'none';
       formatHTML(d);
       highlightSequence(d);
+      // Highlight current label 
+      // highlightLabel(lable)
+      // console.log(labels)
       g
         .append('text')
         .attr('class', 'sunburst-center-text')
@@ -211,15 +214,34 @@ d3.json(`${window.location.origin + window.location.pathname}/data/sunburst-data
         .attr('x', -40)
         .attr('y', 10)
         .on('mouseover', () => {
-          g.select('text').remove();
+          g.select('.sunburst-center-text').remove();
         });
     })
     .on('mouseleave', d => {
       removeHighlight(d);
       tooltips.html('');
       document.querySelector('.large-text').style.display = 'block';
-      g.select('text').remove();
+      g.select('.sunburst-center-text').remove();
     });
+
+    const labelTransform = (d) => {
+      const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+      const y = (d.y0 + d.y1) / 2 * radius;
+      return `rotate(${x - 90}) translate(${y + 48},0) rotate(90)`;
+    }
+
+    const label = g.append('g')
+      .attr('pointer-events', 'none')
+      .attr('text-anchor', 'middle')
+      .style('user-select', 'none')
+      .selectAll('text')
+      .data(root.descendants().slice(1))
+      .join('text')
+        // .attr('x', 5)
+        // .attr('dy', 18) 
+        .attr('transform', d => labelTransform(d.current))
+        .text(d => d.data.name)
+        .attr('class', d => `label label-${d.depth}`)
 })
   .catch((error) => {
     console.error('Error loading the data');
