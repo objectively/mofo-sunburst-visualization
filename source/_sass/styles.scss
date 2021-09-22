@@ -128,6 +128,21 @@ h3 {
   }
 }
 
-.title {
-  z-index: 10;
+.label {
+  display: none;
+}
+
+.label-1 {
+  fill: black;
+  display: block;
+  font-family: 'Zilla Slab', serif;
+  font-weight: bold;
+}
+
+.label-active {
+  fill: black!important;
+}
+
+.label-inactive {
+  fill: #a0a9ad;
 }
