@@ -141,6 +141,31 @@ const removeHighlight = d => {
     .classed('ancestor', false);
 };
 
+const highlightLabel = d => {
+  const allLabels = document.querySelectorAll('.label');
+  let depth = d.depth;
+  let label;
+
+  switch(depth) {
+    case 1:
+      label = d.data.name;
+      break;
+    case 2:
+      label = d.parent.data.name;
+      break;
+    case 3:
+      label = d.parent.parent.data.name;
+      break;
+  }
+
+  allLabels.forEach(label => {
+    label.classList.add('label-inactive');
+  });
+
+  let foundLabel = document.querySelector(`.label-${label}`)
+  foundLabel.classList.add('label-active');
+};
+
 // Specify colors
 const colors = {
   '2016': '#CCCCCC',
@@ -156,7 +181,6 @@ const colors = {
   'Gigabit Community Fund': '#f3722c',
   'Hive': '#43aa8b',
   'MOSS (Mozilla Open Source Support)': '#f94144',
-  'Mozilla Fellowship': '#90be6d',
   'Mozilla Science Mini Grants': '#c43437',
   'NSF WINS (Wireless Innovations for a Networked Society Challenge)': '#f9c74f',
   'Open Internet Engineering Fellowship': '#af376b',
@@ -177,7 +201,7 @@ const colors = {
   'Other/unavailable': '#a3a3b6'
 };
 
-d3.json(`${window.location.origin + window.location.pathname}/data/sunburst-data.json`).then((data) => {
+d3.json(`${window.location.origin + window.location.pathname}/data/sunburst-data.json`).then(data => {
   const root = setPartition(data);
   root.each(d => d.current = d);
 
@@ -202,9 +226,7 @@ d3.json(`${window.location.origin + window.location.pathname}/data/sunburst-data
       document.querySelector('.large-text').style.display = 'none';
       formatHTML(d);
       highlightSequence(d);
-      // Highlight current label 
-      // highlightLabel(lable)
-      // console.log(labels)
+      highlightLabel(d)
       g
         .append('text')
         .attr('class', 'sunburst-center-text')
@@ -222,26 +244,31 @@ d3.json(`${window.location.origin + window.location.pathname}/data/sunburst-data
       tooltips.html('');
       document.querySelector('.large-text').style.display = 'block';
       g.select('.sunburst-center-text').remove();
+      const allLabels = document.querySelectorAll('.label');
+
+      allLabels.forEach(label => {
+        label.classList.remove('label-active', 'label-inactive');
+      });
     });
 
-    const labelTransform = (d) => {
-      const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-      const y = (d.y0 + d.y1) / 2 * radius;
-      return `rotate(${x - 90}) translate(${y + 48},0) rotate(90)`;
-    }
+  const labelTransform = d => {
+    const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+    const y = (d.y0 + d.y1) / 2 * radius;
+    return `rotate(${x - 90}) translate(${y + 48},0) rotate(90)`;
+  }
 
-    const label = g.append('g')
-      .attr('pointer-events', 'none')
-      .attr('text-anchor', 'middle')
-      .style('user-select', 'none')
-      .selectAll('text')
-      .data(root.descendants().slice(1))
-      .join('text')
-        // .attr('x', 5)
-        // .attr('dy', 18) 
-        .attr('transform', d => labelTransform(d.current))
-        .text(d => d.data.name)
-        .attr('class', d => `label label-${d.depth}`)
+  const label = g.append('g')
+    .selectAll('text')
+    .data(root.descendants().slice(1))
+    .join('text')
+
+  label
+    .attr('pointer-events', 'none')
+    .attr('text-anchor', 'middle')
+    .style('user-select', 'none')
+    .attr('transform', d => labelTransform(d.current))
+    .attr('class', d => `label label-${d.depth} label-${d.data.name}`)
+    .text(d => d.data.name)
 })
   .catch((error) => {
     console.error('Error loading the data');
